@@ -1,0 +1,33 @@
+body {
+    background-color: #ffe7b9;
+}
+
+.person {
+    width: 5px;
+    height: 5px;
+    margin-right: 1px;
+    float: left;
+}
+
+.person.male {
+}
+
+.person.female {
+    border-radius: 50%;
+}
+
+.religion-strict {
+    background-color: #fbacac;
+}
+
+.religion-atheist {
+    background-color: #ffc29d;
+}
+
+.religion-intolerant {
+    background-color: #98cfff;
+}
+
+.religion-tolerant {
+    background-color: #a9e4a9;
+}
