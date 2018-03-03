@@ -2,7 +2,7 @@ import {Religions, getRandomReligion} from './models/Religion';
 import Person from './models/Person';
 
 export function marry(person_1, person_2) {
-    const numberOfChildren = Math.floor(Math.random() * 5);
+    const numberOfChildren = Math.floor(Math.random() * 6);
     let children = [];
 
     for (let i = 0; i < numberOfChildren; i++) {

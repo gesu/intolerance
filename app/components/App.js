@@ -2,7 +2,7 @@ import React from 'react';
 import PersonComponent from './Person';
 import Person from '../models/Person';
 import {marry} from '../actions';
-import {Religions} from '../models/Religion';
+import {Religions, getRandomTolerantReligion} from '../models/Religion';
 
 const MAX_PEOPLE = 10000;
 
@@ -10,10 +10,10 @@ function createPeople() {
     let people = [];
     for(let i = 0; i < MAX_PEOPLE; i++) {
         people = people.concat(new Person({
-            religion: (Math.random() - 0.95 > 0) ? Religions.INTOLERANT_RELIGION : null,
+            religion: (Math.random() - 0.99 > 0) ? Religions.INTOLERANT_RELIGION : getRandomTolerantReligion(),
         }));
     }
-    
+
     return people;
 }
 
@@ -24,18 +24,18 @@ class App extends React.Component {
             people: createPeople(),
         };
     }
-    
+
     loop() {
         let unmarried = this.state.people.slice();
         let nextGeneration = [];
-        
+
         unmarried.forEach((person) => {
             if (!person.married) {
                 for (let i = 0; i < unmarried.length; i++) {
                     if (person.id === unmarried[i].id) {
                         continue;
                     }
-                    
+
                     if (!unmarried[i].married
                         && unmarried[i].gender !== person.gender
                     ) {
@@ -47,20 +47,20 @@ class App extends React.Component {
                 }
             }
         });
-        
+
         this.setState({
             people: nextGeneration
         });
-        
+
         setTimeout(() => {
             this.loop();
         }, 1000);
     }
-    
+
     componentDidMount() {
         this.loop();
     }
-    
+
     render() {
         return (
             <div>

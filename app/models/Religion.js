@@ -9,8 +9,12 @@ export function getRandomReligion() {
     return Religions[religions[~~(Math.random() * religions.length)]];
 }
 
-export const getRandomTolerantReligion() {
-    const religions = Object.keys(Religions).delete(Religions.INTOLERANT_RELIGION);
+export function getRandomTolerantReligion() {
+    const religions = Object.keys(Religions).filter((religion)=> {
+        return religion !== INTOLERANT_RELIGION;
+    });
+
+    return Religions[religions[~~(Math.random() * religions.length)]];
 }
 
 export const ATHEIST = 'ATHEIST';
