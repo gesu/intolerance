@@ -31,25 +31,23 @@ class App extends React.Component {
   }
 
   loop() {
-    let unmarried = this.state.people.slice();
+    let people = this.state.people;
     let nextGeneration = [];
 
-    unmarried.forEach(person => {
-      if (!person.married) {
-        for (let i = 0; i < unmarried.length; i++) {
-          if (person.id === unmarried[i].id) {
-            continue;
-          }
+    for (let i = 0; i < people.length; i++) {
+      for (let j = 0; j < people.length; j++) {
+        if (i === j || people[i].married || people[j].married) {
+          continue;
+        }
 
-          if (!unmarried[i].married && unmarried[i].gender !== person.gender) {
-            unmarried[i].married = true;
-            person.married = true;
-            nextGeneration = nextGeneration.concat(marry(person, unmarried[i]));
-            break;
-          }
+        if (people[i].gender !== people[j].gender) {
+          nextGeneration = nextGeneration.concat(marry(people[i], people[j]));
+          people[i].married = true;
+          people[j].married = true;
+          break;
         }
       }
-    });
+    }
 
     this.setState({
       people: nextGeneration
